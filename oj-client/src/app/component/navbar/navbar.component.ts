@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +8,26 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   title =  'COJ';
-  username = 'SIsy';
+  username = '';
 
-  constructor() { }
+  constructor(@Inject('auth') private auth) { }
 
+  profile: any;
   ngOnInit() {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
   }
 
+  login(): void {
+    this.auth.login();
+  }
+
+  logout(): void {
+    this.auth.logout();
+  }
 }

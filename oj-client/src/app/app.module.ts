@@ -11,6 +11,10 @@ import {routing} from './app.routes';
 import {FormsModule} from '@angular/forms';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
+import {AuthService} from "./services/auth.service";
+import { CallbackComponent } from './component/callback/callback.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import {AuthGuardService} from "./services/auth-guard.service";
 
 
 @NgModule({
@@ -19,7 +23,9 @@ import { HttpClientModule } from "@angular/common/http";
     ProblemListComponent,
     ProblemDetailComponent,
     AddProblemComponent,
-    NavbarComponent
+    NavbarComponent,
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,10 @@ import { HttpClientModule } from "@angular/common/http";
   providers: [{
     provide: 'data',
     useClass: DataService
-  }],
+  },{
+    provide: 'auth',
+    useClass: AuthService
+  },AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
