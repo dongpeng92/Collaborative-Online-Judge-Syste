@@ -77,8 +77,6 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    console.log(this.userProfile);
-    console.log(this.userProfile.nickname.includes('admin'));
     if (this.isAuthenticated() && this.userProfile.nickname.includes('admin')) {
       return true;
     } else {
