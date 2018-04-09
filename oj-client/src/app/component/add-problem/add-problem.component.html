@@ -11,7 +11,7 @@
                 name="problemDesc" required placeholder="Enter Problem Description" [(ngModel)]="newProblem.desc"></textarea>
     </div>
     <div class="form-group">
-      <label for="difficulty">Difficult</label>
+      <label for="difficulty">Difficulty</label>
       <select class="form-control" id="difficulty"
               name="difficulty" [(ngModel)]="newProblem.difficulty">
         <option *ngFor="let difficulty of difficulties" [value]="difficulty">

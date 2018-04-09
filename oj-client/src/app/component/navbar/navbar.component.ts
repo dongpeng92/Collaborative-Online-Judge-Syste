@@ -7,7 +7,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  title =  'COJ';
+  title =  'Online Judge System';
   username = '';
 
   constructor(@Inject('auth') private auth) { }

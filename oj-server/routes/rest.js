@@ -20,7 +20,7 @@ router.post('/problems', jsonParser, function (req, res) {
         .then(function (problem) {
            res.json(problem);
         }, function (error) {
-            req.status(400).send('Problem name already exits!')
+            res.status(400).send('Problem name already exits!')
         });
 });
 

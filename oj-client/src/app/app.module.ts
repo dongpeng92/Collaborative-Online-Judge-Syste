@@ -15,6 +15,8 @@ import {AuthService} from "./services/auth.service";
 import { CallbackComponent } from './component/callback/callback.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import {AuthGuardService} from "./services/auth-guard.service";
+import { EditorComponent } from './component/editor/editor.component';
+import {CollaborationService} from "./services/collaboration.service";
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import {AuthGuardService} from "./services/auth-guard.service";
     AddProblemComponent,
     NavbarComponent,
     CallbackComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,10 @@ import {AuthGuardService} from "./services/auth-guard.service";
   },{
     provide: 'auth',
     useClass: AuthService
-  },AuthGuardService],
+  },AuthGuardService, {
+    provide: 'collaboration',
+    useClass: CollaborationService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
