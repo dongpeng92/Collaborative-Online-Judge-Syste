@@ -14,6 +14,8 @@ export class EditorComponent implements OnInit {
 
   sessionId: string;
 
+  output: string;
+
   public languages: string[] = ['Java', 'C++', 'Python'];
   language = 'Java';
 
@@ -31,7 +33,7 @@ export class EditorComponent implements OnInit {
 }`,
     'C++': `#include <iostream>
     using namespace std;
-      
+
     int main() {
         //Type your C++ code here
         return 0;
@@ -42,6 +44,7 @@ export class EditorComponent implements OnInit {
   };
 
   constructor(@Inject('collaboration') private collaboration,
+              @Inject('data') private data,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -86,10 +89,16 @@ export class EditorComponent implements OnInit {
   resetEditor(): void {
     this.editor.getSession().setMode('ace/mode/' + this.language.toLowerCase());
     this.editor.setValue(this.defaultContent[this.language]);
+    this.output = '';
   }
 
   submit(): void {
-    let user_code = this.editor.getValue();
-    console.log(user_code);
+    let userCode = this.editor.getValue();
+    let data = {
+      user_code: userCode,
+      lang: this.language.toLowerCase()
+    };
+    this.data.buildAndRun(data)
+      .then(res => this.output = res.text);
   }
 }

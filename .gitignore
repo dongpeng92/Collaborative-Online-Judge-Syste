@@ -5,6 +5,7 @@ oj-client/dist
 /dist-server
 /tmp
 /out-tsc
+executor/executor_utils.pyc
 
 /public
 
