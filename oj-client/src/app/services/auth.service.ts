@@ -16,7 +16,7 @@ export class AuthService {
     responseType: 'token id_token',
     audience: 'https://doonnoop.auth0.com/userinfo',
     redirectUri: 'http://localhost:3000/callback',
-    scope: 'openid profile email ROLE_USER'
+    scope: 'openid profile email metadata'
   });
 
   constructor(public router: Router, private http: HttpClient) {}
@@ -82,18 +82,18 @@ export class AuthService {
   }
 
   public resetPassword(): void {
-    let url: string = 'https://doonnoop.auth0.com/dbconnections/change_password';
-    let headers = new HttpHeaders({'content-type': 'application/json'});
+    let url: string = `https://doonnoop.auth0.com/dbconnections/change_password`;
+    const headers = new HttpHeaders({'content-type': 'application/json'});
     let body = {
       client_id: 'Hk4NO2w8X6RFeZmAVN3HTGzVcPbzG7_e',
       email: this.userProfile.email,
       connection: 'Username-Password-Authentication'
     };
 
-    this.http.post(url, body, {headers: headers, observe: 'response'})
+    this.http.post(url, body, {headers: headers, responseType: 'text'})
       .toPromise()
       .then((res) => {
-        console.log(res.body);
+        console.log(res);
       })
       .catch(this.handleError);
   }

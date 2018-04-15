@@ -3,7 +3,7 @@ import { Problem } from '../models/problem.model';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
@@ -35,6 +35,17 @@ export class DataService {
       .toPromise()
       .then((res) => {
         this.getProblems();
+        return res;
+      })
+      .catch(this.handleError);
+  }
+
+  buildAndRun(data): Promise<Object> {
+    const headers = new HttpHeaders({ 'content-type': 'application/json' });
+    return this.http.post<Object>('/api/v1/build_and_run', data, {headers: headers})
+      .toPromise()
+      .then((res) => {
+        console.log(res);
         return res;
       })
       .catch(this.handleError);
