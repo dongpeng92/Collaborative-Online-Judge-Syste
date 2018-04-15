@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { Problem } from '../../models/problem.model';
+import {Problem} from '../../models/problem.model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-problem-list',
@@ -7,7 +8,8 @@ import { Problem } from '../../models/problem.model';
   styleUrls: ['./problem-list.component.css']
 })
 export class ProblemListComponent implements OnInit {
-  problems: Problem[];
+  problems: Problem[] = [];
+  subscriptionProblem: Subscription;
 
   constructor(@Inject('data') private data) { }
 
@@ -16,6 +18,9 @@ export class ProblemListComponent implements OnInit {
   }
 
   getProblems(): void {
-    this.problems = this.data.getProblems();
+    this.subscriptionProblem = this.data.getProblems()
+      .subscribe(problems => this.problems = problems);
   }
+
+  // ngOndistory
 }
