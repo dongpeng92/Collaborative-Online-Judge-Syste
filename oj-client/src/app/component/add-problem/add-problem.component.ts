@@ -17,7 +17,8 @@ export class AddProblemComponent implements OnInit {
   public difficulties = ['Easy', 'Medium', 'Hard', 'Super']
 
   newProblem: Problem = Object.assign({}, DEFAULT_PROBLEM);
-  constructor(@Inject ('data') private data) { }
+  constructor(@Inject ('data') private data,
+              @Inject ('authGuard') private authGuard) { }
 
   ngOnInit() {
   }

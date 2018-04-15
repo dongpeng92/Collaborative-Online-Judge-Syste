@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="container" *ngIf="problem">
   <div class="col-xs-12 col-md-4">
     <div class="">
@@ -5,5 +7,8 @@
       <p>{{ problem.desc }}</p>
       <br/>
     </div>
+  </div>
+  <div class="hidden-xs col-sm-12 col-md-8">
+    <app-editor></app-editor>
   </div>
 </div>
