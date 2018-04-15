@@ -19,7 +19,8 @@ export class AddProblemComponent implements OnInit {
 
   newProblem: Problem = Object.assign({}, DEFAULT_PROBLEM);
 
-  constructor(@Inject('data') private data){ }
+  constructor(@Inject('data') private data,
+              @Inject('auth') private auth){ }
 
   ngOnInit(){
   }

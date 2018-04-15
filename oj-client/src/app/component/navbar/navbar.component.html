@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">-->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,29 +14,29 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" (ngSubmit)="searchProblem()">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search Problem">
+            <input type="text" class="form-control" placeholder="Search Problem" [formControl]="searchBox">
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
           <li>
             <form class="navbar-form">
-              <button type="button" class="btn btn-primary">Sign In</button>
+              <button type="button" class="btn btn-primary" *ngIf="!auth.isAuthenticated()" (click)="login()">Sign In</button>
             </form>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ username }} <span class="caret"></span></a>
+          <li class="dropdown" *ngIf="auth.isAuthenticated()">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ profile?.nickname }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">My Profile</a></li>
+              <li><a routerLink="/profile">My Profile</a></li>
               <li><a href="#">My Favorite</a></li>
               <li><a href="#">My Submission</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Sign Out</a></li>
+              <li><a href="#" (click)="logout()">Sign Out</a></li>
             </ul>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-</div>
+<!--</div>-->
