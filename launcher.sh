@@ -11,7 +11,7 @@ npm install
 ng build --watch &
 cd ../executor
 pip install -r requirements.txt
-python executor_server.py &
+python executor_server.py 5000 &
 
 echo "=================================================="
 read -p "PRESS [ENTER] TO TERMINATE PROCESSES." PRESSKEY

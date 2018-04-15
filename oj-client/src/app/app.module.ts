@@ -45,7 +45,10 @@ import {InputService} from "./services/input.service";
   },{
     provide: 'auth',
     useClass: AuthService
-  },AuthGuardService, {
+  },{
+    provide: 'authGuard',
+    useClass: AuthGuardService
+  },{
     provide: 'collaboration',
     useClass: CollaborationService
   },{

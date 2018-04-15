@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +19,8 @@ export class AuthService {
     scope: 'openid profile email'
   });
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,
+              private http: HttpClient) {}
 
   public login(): void {
     this.auth0.authorize();
@@ -76,12 +79,34 @@ export class AuthService {
     });
   }
 
+  public resetPassword(): void {
+    let url: string = `https://doonnoop.auth0.com/dbconnections/change_password`;
+    const headers = new HttpHeaders({'content-type': 'application/json'});
+    let body = {
+      client_id: 'Hk4NO2w8X6RFeZmAVN3HTGzVcPbzG7_e',
+      email: this.userProfile.email,
+      connection: 'Username-Password-Authentication'
+    };
+
+    this.http.post(url, body,{headers: headers, responseType: 'text'})
+      .toPromise()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(this.handleError)
+  }
+
   isAdmin(): boolean {
     if (this.isAuthenticated() && this.userProfile.nickname.includes('admin')) {
       return true;
     } else {
       return false;
     }
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.body || error);
   }
 
 }

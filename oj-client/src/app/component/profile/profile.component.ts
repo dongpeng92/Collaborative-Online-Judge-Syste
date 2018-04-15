@@ -24,4 +24,8 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  resetPassword(): void {
+    this.auth.resetPassword();
+  }
+
 }
